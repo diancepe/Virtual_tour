@@ -323,40 +323,7 @@
     <div class="chat-icon" onclick="openChat()" title="Chat">
         💬
     </div>
-
-    <script>
-        function exploreArea() {
-            alert('Exploring Visibel Ai Area... This would navigate to the detailed tour.');
-        }
-
-        function nextRoom() {
-            alert('Moving to next room... This would navigate to the next datacenter area.');
-        }
-
-        function openChat() {
-            alert('Opening chat... This would open a chat interface for questions.');
-        }
-
-        // Add some interactive hover effects
-        document.querySelectorAll('.nav-icon, .social-icon').forEach(icon => {
-            icon.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1)';
-            });
-            
-            icon.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-            });
-        });
-
-        // Add smooth scroll effect for mobile
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.5s ease';
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-    </script>
+    
     <script>
     const canvas = document.getElementById('digital-bg');
     const ctx = canvas.getContext('2d');
