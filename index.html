@@ -357,5 +357,65 @@
             }, 100);
         });
     </script>
+    <script>
+    const canvas = document.getElementById('digital-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let dots = [];
+
+    for (let i = 0; i < 100; i++) {
+        dots.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.5 + 0.5,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < dots.length; i++) {
+            let d = dots[i];
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+            ctx.fillStyle = '#00ffff';
+            ctx.fill();
+            d.x += d.dx;
+            d.y += d.dy;
+
+            if (d.x < 0 || d.x > canvas.width) d.dx *= -1;
+            if (d.y < 0 || d.y > canvas.height) d.dy *= -1;
+        }
+
+        // garis antar titik
+        for (let i = 0; i < dots.length; i++) {
+            for (let j = i + 1; j < dots.length; j++) {
+                let a = dots[i], b = dots[j];
+                let dist = Math.hypot(a.x - b.x, a.y - b.y);
+                if (dist < 100) {
+                    ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
 </body>
 </html>
