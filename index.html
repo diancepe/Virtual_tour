@@ -476,13 +476,42 @@
             100% { transform: rotate(360deg); }
         }
         
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
         .feature-image {
-            width: 50%;
-            max-width: 20px; /* batas maksimal */
-            height: auto;
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
             border-radius: 10px;
-            display: block;
-            margin: 10px auto;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #444;
         }
     </style>
 </head>
@@ -541,13 +570,17 @@
             </div>
 
             <div class="features-grid">
-                <img src="1. Lobby Visibel.Ai.png" alt="images" class="Lobby">
-                <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3 class="feature-title">MAIN LOBBY</h3>
-                    <p class="feature-description">The Main Lobby of Visibel.ai serves as the welcoming gateway to a transparent AI ecosystem.
-                        Designed with openness and clarity in mind, this space introduces visitors to the core principles of Visibel AI: ethical innovation, explainability, and human-centered technology.</p>
-                </div>     
+              <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3 class="feature-title">VISIBEL.AI BUILDING</h3>
+
+                <!-- Gambar lokal -->
+                <img src="1. Lobby Visibel.Ai.png" alt="Gambar Gedung" class="feature-image">
+
+                <p class="feature-description">
+                  The Visibel.ai Building is a digital innovation hub that showcases how AI can be transparent and ethical.
+                </p>
+              </div> 
                 <div class="feature-card">
                     <div class="feature-icon"></div>
                     <h3 class="feature-title">MAIN LOBBY</h3>
