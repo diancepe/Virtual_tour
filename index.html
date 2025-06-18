@@ -475,6 +475,22 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .panorama-container { 
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .static-img,
+        .panorama-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -532,11 +548,26 @@
             </div>
 
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="features-grid">
+                  <div class="feature-card" onclick="togglePanorama(this)">
                     <div class="feature-icon"></div>
                     <h3 class="feature-title">VISIBEL.AI BUILDING</h3>
-                    <p class="feature-description">The Visibel.ai Building is a digital innovation hub that showcases how artificial intelligence can be transparent, ethical, and human-centered.
-                        Each room within the building—such as the Innovation Lab, Monitoring Center, and Collaboration Hub—represents a critical step in building trustworthy AI systems.</p>
+                
+                    <!-- Container Panorama -->
+                    <div class="panorama-container">
+                      <img src="https://example.com/panorama-preview.jpg" alt="Preview" class="static-img" />
+                      <iframe 
+                        class="panorama-viewer" 
+                        style="display: none;" 
+                        src="https://pannellum.org/vr/?panorama=https://example.com/panorama.jpg"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                
+                    <p class="feature-description">
+                      The Visibel.ai Building is a digital innovation hub...
+                    </p>
+                  </div>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"></div>
