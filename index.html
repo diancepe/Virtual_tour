@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visibel.Ai Panoramic Explorer</title>
+    <title>The Mechanical Area - Microsoft Story Labs</title>
     <style>
         * {
             margin: 0;
@@ -12,42 +12,253 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%);
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Enhanced Digital Circuit Background */
+        .digital-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .circuit-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 30%, rgba(0, 150, 255, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 40% 70%, rgba(0, 200, 150, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(100, 150, 255, 0.08) 0%, transparent 45%);
+        }
+
+        .circuit-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.03) 25%, rgba(0, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.03) 75%, rgba(0, 255, 255, 0.03) 76%, transparent 77%),
+                linear-gradient(transparent 24%, rgba(0, 255, 255, 0.03) 25%, rgba(0, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.03) 75%, rgba(0, 255, 255, 0.03) 76%, transparent 77%);
+            background-size: 80px 80px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+
+        /* Floating particles for web */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+            animation: floatParticle 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .particle-small {
+            width: 3px;
+            height: 3px;
+        }
+
+        .particle-medium {
+            width: 5px;
+            height: 5px;
+        }
+
+        .particle-large {
+            width: 8px;
+            height: 8px;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) scale(1); 
+                opacity: 0.3; 
+            }
+            33% { 
+                transform: translateY(-30px) translateX(15px) scale(1.2); 
+                opacity: 0.8; 
+            }
+            66% { 
+                transform: translateY(-10px) translateX(-10px) scale(0.8); 
+                opacity: 0.6; 
+            }
+        }
+
+        /* Header Navigation */
+        .header {
+            position: relative;
+            z-index: 10;
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .microsoft-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff5722, #ff9800, #4caf50, #2196f3);
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 2px;
+            padding: 6px;
+        }
+
+        .logo-square {
+            border-radius: 2px;
+        }
+
+        .logo-square:nth-child(1) { background: #ff5722; }
+        .logo-square:nth-child(2) { background: #4caf50; }
+        .logo-square:nth-child(3) { background: #2196f3; }
+        .logo-square:nth-child(4) { background: #ff9800; }
+
+        .brand-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: #00ffff;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #0080ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content Container */
+        .main-container {
+            position: relative;
+            z-index: 5;
+            min-height: calc(100vh - 120px);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            padding: 60px 40px;
         }
 
-        .container {
+        .content-wrapper {
+            max-width: 1000px;
             text-align: center;
-            max-width: 1200px;
-            width: 100%;
-            padding: 20px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .main-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 200;
+            color: #fff;
+            margin-bottom: 40px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #00ffff 0%, #0080ff 50%, #8000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
         }
 
         .explore-btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            text-decoration: none;
+            background: linear-gradient(135deg, #00ffff, #0080ff, #6366f1);
+            color: #fff;
+            border: none;
+            padding: 20px 48px;
             border-radius: 50px;
             font-size: 18px;
-            font-weight: bold;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
             cursor: pointer;
-            border: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
-        }
-
-        .explore-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .explore-btn::before {
@@ -57,256 +268,436 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.8s;
         }
 
         .explore-btn:hover::before {
             left: 100%;
         }
 
+        .explore-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.5);
+        }
+
         .arrow {
-            margin-left: 10px;
             transition: transform 0.3s ease;
+            font-size: 20px;
         }
 
         .explore-btn:hover .arrow {
-            transform: translateX(5px);
+            transform: translateX(8px);
         }
 
-        .panorama-container {
-            margin-top: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-            display: none;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
         }
 
-        .panorama-container.active {
-            opacity: 1;
-            transform: translateY(0);
+        .feature-card {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            transition: all 0.4s ease;
+            transform: scale(0);
+        }
+
+        .feature-card:hover::before {
+            transform: scale(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
             display: block;
         }
 
-        .panorama-wrapper {
+        .feature-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
             position: relative;
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            background: #000;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            padding: 40px 0;
+            margin-top: 80px;
         }
 
-        .panorama-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
-            cursor: grab;
-        }
-
-        .panorama-slide:active {
-            cursor: grabbing;
-        }
-
-        .slide-1 {
-            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="100%" style="stop-color:%23E0F6FF;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="400" fill="url(%23sky)"/><circle cx="100" cy="80" r="30" fill="%23FFD700"/><polygon points="200,300 350,150 500,200 650,100 800,180 950,120 1100,160 1200,140 1200,400 0,400" fill="%23228B22"/><rect x="400" y="250" width="60" height="80" fill="%238B4513"/><polygon points="400,250 430,220 460,250" fill="%23DC143C"/></svg>');
-        }
-
-        .slide-2 {
-            background: linear-gradient(45deg, #a8edea 0%, #fed6e3 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%234A90E2;stop-opacity:1" /><stop offset="100%" style="stop-color:%237ED321;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="400" fill="url(%23ocean)"/><circle cx="1000" cy="60" r="25" fill="%23FFD700"/><path d="M0,200 Q300,150 600,200 T1200,180 L1200,400 L0,400 Z" fill="%23F4A460"/><circle cx="200" cy="180" r="8" fill="%23FF6347"/><circle cx="800" cy="170" r="6" fill="%23FF1493"/></svg>');
-        }
-
-        .slide-3 {
-            background: linear-gradient(45deg, #ffecd2 0%, #fcb69f 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><linearGradient id="sunset" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%23FF8A80;stop-opacity:1" /><stop offset="50%" style="stop-color:%23FFB74D;stop-opacity:1" /><stop offset="100%" style="stop-color:%23FFD54F;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="400" fill="url(%23sunset)"/><circle cx="600" cy="100" r="40" fill="%23FF5722"/><polygon points="100,350 200,200 300,250 400,180 500,220 600,160 700,200 800,140 900,180 1000,120 1100,160 1200,140 1200,400 0,400" fill="%23795548"/></svg>');
-        }
-
-        .panorama-controls {
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
         }
 
-        .control-btn {
-            width: 12px;
-            height: 12px;
+        .footer-info {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #00ffff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            border: none;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffff;
+            font-size: 18px;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .control-btn.active {
-            background: #4ecdc4;
-            transform: scale(1.2);
+        .social-link:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
         }
 
-        .panorama-info {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            color: white;
-        }
-
-        .info-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .info-description {
-            font-size: 16px;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+                flex-direction: column;
+                gap: 20px;
             }
-            to {
-                transform: translateX(0);
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .main-container {
+                padding: 40px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .footer-links {
+                order: -1;
             }
         }
 
-        .slide-enter {
-            animation: slideIn 0.5s ease-out;
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.8s ease;
         }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 255, 255, 0.1);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="digital-bg"></canvas>
-
- <header class="header">
-  <div class="logo">
-    <img src="./visibel.ai-logo.png" alt="Logo" style="height: 32px;" />
-    <span>Tour</span>
-  </div>
-  <div class="nav-icons">
-    <div class="nav-icon"></div>
-    <div class="nav-icon"></div>
-  </div>
-</header>
-
-  <main class="main-content">
-    <h1 class="title">
-      Virtual<br />
-      <strong>Tour Visibel.Ai</strong>
-    </h1>
-
-    <p class="subtitle">
-      Visibel AI is an approach in the development of Artificial Intelligence (AI) systems that emphasizes transparency,
-      visibility, and clarity of the AI's decision-making processes for its users. In a world increasingly reliant on AI-based technologies, 
-      the ability of a system to produce accurate decisions is no longer sufficient. Users—whether individuals, organizations,
-      or institutions—also require a clear understanding of how and why a particular decision is made by the AI system.
-    </p>
-
-    <a href="#" class="explore-btn" onclick="exploreArea()">
-      Explore Visibel.Ai Area <span class="arrow">→</span>
-    </a>
-  </main>
-
-  <footer class="footer">
-    <div class="social-links">
-      <div class="social-icon" title="LinkedIn"></div>
-      <div class="social-icon" title="Twitter"></div>
-      <div class="social-icon" title="Facebook"></div>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
     </div>
 
-    <div class="footer-info">
-      <div>HTML version</div>
-      <div style="margin-top: 10px;">Privacy • Consumer Health Privacy</div>
+    <!-- Digital Background -->
+    <div class="digital-background">
+        <div class="circuit-layer"></div>
+        <div class="circuit-grid"></div>
     </div>
 
-    <div class="next-room" onclick="nextRoom()">
-      <span>Next Room</span> <span class="arrow">→</span>
-    </div>
-  </footer>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-section">
+                <div class="microsoft-logo">
+                    <div class="logo-square"></div>
+                    <div class="logo-square"></div>
+                    <div class="logo-square"></div>
+                    <div class="logo-square"></div>
+                </div>
+                <span class="brand-text">Story Labs</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item">Home</a></li>
+                <li><a href="#" class="nav-item">Areas</a></li>
+                <li><a href="#" class="nav-item">Technology</a></li>
+                <li><a href="#" class="nav-item">About</a></li>
+                <li><a href="#" class="nav-item">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <div class="chat-icon" onclick="openChat()" title="Chat">💬</div>
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="content-wrapper">
+            <div class="subtitle">The</div>
+            <h1 class="main-title">Mechanical Area</h1>
+            <p class="description">
+                Microsoft manages datacenter operations in a secure, reliable and sustainable manner, using the latest innovations in technology. Whether this is ensuring the server and network hardware is efficiently cooled, backup systems are reliably maintained, or physical and logical infrastructure are securely protected, people are at the center of everything that happens in our datacenter operations.
+            </p>
+            
+            <div class="cta-section">
+                <button class="explore-btn" onclick="exploreArea()">
+                    Explore Mechanical Area <span class="arrow">→</span>
+                </button>
+            </div>
 
-  <script>
-    function exploreArea() {
-      alert("Exploring Visibel Ai Area...");
-    }
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Hardware Management</h3>
+                    <p class="feature-description">Advanced monitoring and maintenance of server infrastructure with AI-powered diagnostics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❄️</div>
+                    <h3 class="feature-title">Cooling Systems</h3>
+                    <p class="feature-description">Efficient thermal management solutions ensuring optimal performance and sustainability.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Security Infrastructure</h3>
+                    <p class="feature-description">Multi-layered physical and digital security protecting critical datacenter operations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Power Management</h3>
+                    <p class="feature-description">Reliable power distribution and backup systems ensuring 99.9% uptime.</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    function nextRoom() {
-      alert("Moving to next room...");
-    }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div>© 2024 Microsoft Corporation</div>
+                <div>HTML Version - Story Labs</div>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Terms</a>
+                <a href="#" class="footer-link">Consumer Health Privacy</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link">📘</a>
+                <a href="#" class="social-link">🐦</a>
+                <a href="#" class="social-link">💼</a>
+            </div>
+        </div>
+    </footer>
 
-    function openChat() {
-      alert("Opening chat...");
-    }
+    <script>
+        // Page Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
 
-    // Digital background animation
-    const canvas = document.getElementById('digital-bg');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    let dots = [];
-    for (let i = 0; i < 100; i++) {
-      dots.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.5 + 0.5,
-        dx: (Math.random() - 0.5) * 0.5,
-        dy: (Math.random() - 0.5) * 0.5
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < dots.length; i++) {
-        let d = dots[i];
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = '#00ffff';
-        ctx.fill();
-        d.x += d.dx;
-        d.y += d.dy;
-        if (d.x < 0 || d.x > canvas.width) d.dx *= -1;
-        if (d.y < 0 || d.y > canvas.height) d.dy *= -1;
-      }
-
-      for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
-          let a = dots[i], b = dots[j];
-          let dist = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dist < 100) {
-            ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
+        // Dynamic Particle Generation
+        function createParticle() {
+            const particle = document.createElement('div');
+            const size = Math.random() > 0.7 ? 'large' : Math.random() > 0.4 ? 'medium' : 'small';
+            particle.className = `particle particle-${size}`;
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            
+            document.querySelector('.digital-background').appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 8000);
         }
-      }
 
-      requestAnimationFrame(draw);
-    }
+        // Generate particles continuously
+        setInterval(createParticle, 1500);
 
-    draw();
-  </script>
+        // Initial particles
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+
+        // Explore Area Function
+        function exploreArea() {
+            const btn = document.querySelector('.explore-btn');
+            
+            // Button animation
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'translateY(-4px) scale(1.05)';
+            }, 150);
+
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                background: rgba(0, 255, 255, 0.2);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: rippleEffect 1s ease-out;
+                left: 50%;
+                top: 50%;
+                margin-left: -100px;
+                margin-top: -100px;
+                pointer-events: none;
+                z-index: -1;
+            `;
+            
+            btn.style.position = 'relative';
+            btn.appendChild(ripple);
+            
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.parentNode.removeChild(ripple);
+                }
+            }, 1000);
+
+            // Simulate navigation or modal
+            console.log('Exploring Mechanical Area...');
+            
+            // You can add actual navigation or modal functionality here
+            // window.location.href = '/mechanical-area';
+            // or show a modal with detailed content
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                0% { transform: scale(0); opacity: 0.8; }
+                100% { transform: scale(2); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add smooth scroll behavior or page navigation here
+            });
+        });
+
+        // Feature cards hover effect enhancement
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Parallax effect for background elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelector('.circuit-layer').style.transform = `translateY(${rate}px)`;
+        });
+    </script>
 </body>
 </html>
