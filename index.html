@@ -402,34 +402,33 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 20px;
-                flex-direction: column;
-                gap: 20px;
-            }
+        .nav-container {
+            padding: 0 20px;
+            flex-direction: column;
+            gap: 20px;
+         }
 
-            .nav-menu {
-                gap: 20px;
-            }
+        .nav-menu {
+            gap: 20px;
+        }
 
-            .main-container {
-                padding: 40px 20px;
-            }
+        .main-container {
+            padding: 40px 20px;
+        }
 
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+        .features-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
 
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                padding: 0 20px;
-            }
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+            padding: 0 20px;
+        }
 
-            .footer-links {
+        .footer-links {
                 order: -1;
-            }
         }
 
         /* Loading Animation */
@@ -475,34 +474,46 @@
         }
 
         .feature-card {
-            background: #rgba;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
+            border-radius: 12px;
+            max-width: 320px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            margin: 20px auto;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
 
-        .feature-icon {
-            font-size: 2rem;
+      .feature-card h3 {
             margin-bottom: 10px;
+            color: #333;
         }
 
-        .feature-title {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+  .    feature-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.4;
         }
 
-        .feature-image {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
+      .btn-ripple {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
         }
 
-        .feature-description {
-            font-size: 0.95rem;
-            color: #fff;
+      .btn-ripple:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -556,14 +567,14 @@
 
             <div class="features-grid">
                 <div class="feature-card">
+                  <h3>Meeting Room</h3>
+                  <p>Ruang kolaborasi tim dan client yang nyaman dan modern untuk meeting produktif.</p>
+                  <a href="meeting-room.html" class="btn-ripple">🏢 Masuk ke Meeting Room</a>
+                </div>
                     <div class="feature-icon"></div>
                     <h3 class="feature-title">VISIBEL.AI BUILDING</h3>
                     <!-- Gambar lokal -->
                     <img src="Building.Ai.png" alt="Gambar Gedung" class="feature-image">
-
-                    <a href="meeting-room.html" class="btn-ripple">
-                        🏢 Eksplore
-                    </a>
 
                     <p class="feature-description">
                       The Visibel.ai Building is a digital innovation hub that showcases how AI can be transparent and ethical.
