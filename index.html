@@ -636,7 +636,7 @@
         // Inisialisasi Pannellum viewer
 pannellum.viewer('panorama-container', {
     type: 'equirectangular',
-    panorama: 'Monitoring Room.jpg', // ganti nama file panorama kamu
+    panorama: 'Monitoring Room.jpg',// ganti nama file panorama kamu
     autoLoad: true,
     hotSpots: [
         {
@@ -647,15 +647,6 @@ pannellum.viewer('panorama-container', {
             createTooltipArgs: {
                 label: "Masuk ke Meeting Room",
                 url: "meetingroom.html"
-            }
-        {
-            pitch: 2,
-            yaw: 150,
-            cssClass: 'custom-hotspot',
-            createTooltipFunc: hotspotLink,
-            createTooltipArgs: {
-                label: "Masuk ke Monitoring Room",
-                url: "meonitoringroom.html"
             }
         }
     ]
