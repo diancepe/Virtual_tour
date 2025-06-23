@@ -636,7 +636,7 @@
         // Inisialisasi Pannellum viewer
 pannellum.viewer('panorama-container', {
     type: 'equirectangular',
-    panorama: 'Monitoring Room.jpg', // ganti nama file panorama kamu
+    panorama: 'Monitoring Room.jpg', 'Meeting Rooom.jpg','Data Center.jpg', 'Containment.jpg','Lobby.jpg','Building.jpg' // ganti nama file panorama kamu
     autoLoad: true,
     hotSpots: [
         {
@@ -648,28 +648,19 @@ pannellum.viewer('panorama-container', {
                 label: "Masuk ke Meeting Room",
                 url: "meetingroom.html"
             }
-        }
-    ]
-});
-         // Inisialisasi Pannellum viewer
-pannellum.viewer('panorama-container', {
-    type: 'equirectangular',
-    panorama: 'Meeting Rooom.jpg', // ganti nama file panorama kamu
-    autoLoad: true,
-    hotSpots: [
         {
             pitch: 2,
             yaw: 150,
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspotLink,
             createTooltipArgs: {
-                label: "Masuk ke Data Center",
-                url: "datacenter.html"
+                label: "Masuk ke Monitoring Room",
+                url: "meonitoringroom.html"
             }
         }
     ]
 });
-
+        
 // Fungsi hotspot
 function hotspotLink(hotSpotDiv, args) {
     hotSpotDiv.classList.add('custom-hotspot');
