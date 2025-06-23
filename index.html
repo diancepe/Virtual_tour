@@ -655,34 +655,51 @@ pannellum.viewer('panorama-container', {
 // Fungsi hotspot
 function hotspotLink(hotSpotDiv, args) {
     hotSpotDiv.classList.add('custom-hotspot');
-    hotSpotDiv.innerHTML = args.label; // Label dari JSON Pannellum
+    hotSpotDiv.innerHTML = `
+        <img src="${args.image}" alt="${args.label}" style="width: 32px; height: 32px; display: block; margin: 0 auto;">
+        <div style="margin-top: 6px;">${args.label}</div>
+    `;
     hotSpotDiv.onclick = function () {
         window.location.href = args.url;
     };
 }
-
+        hotSpots: [
+    {
+        pitch: 10,
+        yaw: 90,
+        cssClass: 'custom-hotspot',
+        createTooltipFunc: hotspotLink,
+        createTooltipArgs: {
+            label: "Ke Meeting Room",
+            url: "meetingroom.html",
+            image: "Meeting Rooom.png"  // Gambar ikon (harus di folder yang sama)
+        }
+    }
+]
 // Tambahkan style untuk hotspot jika perlu
 const style = document.createElement('style');
 style.innerHTML = `
     .custom-hotspot {
-        padding: 12px 20px;
-        background: white;
-        color: #111;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 10px;
         border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+        box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
         font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.3s ease;
+        font-size: 12px;
+        color: #222;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         cursor: pointer;
-        white-space: nowrap;
+        min-width: 60px;
     }
 
     .custom-hotspot:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
-        background: #e6faff;
-        color: #0077cc;
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 24px rgba(0, 123, 255, 0.5);
+    }
+
+    .custom-hotspot img {
+        border-radius: 6px;
     }
 `;
 document.head.appendChild(style);
