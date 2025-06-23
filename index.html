@@ -19,6 +19,7 @@
             position: relative;
         }
 
+        /* Background Elements */
         .circuit-layer {
             position: absolute;
             width: 100%;
@@ -48,13 +49,6 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(80px, 80px); }
         }
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-x: hidden;
-            font-family: sans-serif;
-        }
 
         .video-background {
             position: fixed;
@@ -73,15 +67,7 @@
             object-fit: cover;
         }
 
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 100px 20px;
-            background: rgba(255, 255, 255, 0.8);
-            min-height: 200vh; /* supaya ada ruang scroll */
-        }
-
-        /* Floating particles for web */
+        /* Floating particles */
         .particle {
             position: absolute;
             border-radius: 50%;
@@ -146,24 +132,9 @@
         }
 
         .logo {
-            width: 200px;   /* sesuaikan ukuran lebar */
-            height: auto;   /* tinggi menyesuaikan proporsional */
-            max-width: 100%; /* supaya responsif */
-        }
-
-        .logo-square {
-            border-radius: 2px;
-        }
-
-        .logo-square:nth-child(1) { background: #ff5722; }
-        .logo-square:nth-child(2) { background: #4caf50; }
-        .logo-square:nth-child(3) { background: #2196f3; }
-        .logo-square:nth-child(4) { background: #ff9800; }
-
-        .brand-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 18px;
-            font-weight: 300;
+            width: 200px;
+            height: auto;
+            max-width: 100%;
         }
 
         .nav-menu {
@@ -204,20 +175,13 @@
             position: relative;
             z-index: 5;
             min-height: calc(100vh - 120px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 60px 40px;
         }
-        .card-wrapper {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap; /* Agar tetap rapi di layar kecil */
-            justify-content: center;
-       
+
         .content-wrapper {
             max-width: 1000px;
             text-align: center;
+            margin: 0 auto;
         }
 
         .subtitle {
@@ -253,74 +217,21 @@
             margin-right: auto;
         }
 
-        .cta-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .explore-btn {
-            background: linear-gradient(135deg, #00ffff, #0080ff, #6366f1);
-            color: #fff;
-            border: none;
-            padding: 20px 48px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .explore-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.8s;
-        }
-
-        .explore-btn:hover::before {
-            left: 100%;
-        }
-
-        .explore-btn:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.5);
-        }
-
-        .arrow {
-            transition: transform 0.3s ease;
-            font-size: 20px;
-        }
-
-        .explore-btn:hover .arrow {
-            transform: translateX(8px);
-        }
-
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .feature-card {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 20px;
             padding: 30px;
             text-align: center;
@@ -347,14 +258,8 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(0, 255, 255, 0.3);
+            border-color: rgba(0, 255, 255, 0.4);
             box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            display: block;
         }
 
         .feature-title {
@@ -362,120 +267,62 @@
             font-size: 20px;
             font-weight: 500;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin: 15px 0;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
         }
 
         .feature-description {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 14px;
             line-height: 1.6;
-        }
-
-        /* Footer */
-        .footer {
+            margin-bottom: 20px;
             position: relative;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
-            padding: 40px 0;
-            margin-top: 80px;
+            z-index: 2;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .footer-info {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .footer-link {
-            color: rgba(255, 255, 255, 0.7);
+        .btn-ripple {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            color: white;
+            font-weight: bold;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: #00ffff;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #00ffff;
-            font-size: 18px;
-            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
         }
 
-        .social-link:hover {
-            background: rgba(0, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+        .btn-ripple::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 20px;
-                flex-direction: column;
-                gap: 20px;
-            }
+        .btn-ripple:hover::before {
+            left: 100%;
+        }
 
-            .nav-menu {
-                gap: 20px;
-            }
-
-            .main-container {
-                padding: 40px 20px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .features-grid {
-                display: flex;
-                justify-content: center; /* tengah secara horizontal */
-                gap: 40px;                /* jarak antar kartu */
-                flex-wrap: wrap;          /* biar responsif di layar kecil */
-                padding: 20px;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                padding: 0 20px;
-            }
-
-            .footer-links {
-                order: -1;
-            }
+        .btn-ripple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
         }
 
         /* Loading Animation */
@@ -512,58 +359,69 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .feature-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 10px 0;
-        }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.3); /* putih transparan */
-            backdrop-filter: blur(10px);          /* efek blur kaca (opsional) */
-            padding: 20px;
-            border-radius: 12px;
-            max-width: 350px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin: 20px auto;
-            font-family: sans-serif;
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-menu {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-container {
+                padding: 40px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 40px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .logo {
+                width: 150px;
+            }
         }
 
-        .feature-image {
-            width: 100%;
-            max-height: 200px;
-            object-fit: contain;
-            margin-bottom: 10px;
-            border-radius: 8px;
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 20px 15px;
+            }
+            
+            .feature-card {
+                padding: 15px;
+            }
+            
+            .btn-ripple {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
 
-        .btn-ripple {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 24px;
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .btn-ripple:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+        /* Ripple effect animation */
+        @keyframes rippleEffect {
+            0% { transform: scale(0); opacity: 0.8; }
+            100% { transform: scale(2); opacity: 0; }
         }
     </style>
 </head>
 <body>
-     <div class="video-background">
+    <div class="video-background">
         <video autoplay muted loop playsinline>
-          <source src="Video background.mp4" type="video/mp4">
-          Browser Anda tidak mendukung video tag.
-          </video>
-     </div>
+            <source src="Video background.mp4" type="video/mp4">
+            Browser Anda tidak mendukung video tag.
+        </video>
+    </div>
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
@@ -580,21 +438,19 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo-section">
-                <img src="visibel.ai-logo.png" alt="Logo" class="logo" /
+                <img src="visibel.ai-logo.png" alt="Logo" class="logo" />
             </div>
             <ul class="nav-menu">
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a href="#" class="nav-item"></a></li>
+                <li><a href="#home" class="nav-item">Home</a></li>
+                <li><a href="#about" class="nav-item">About</a></li>
+                <li><a href="#tour" class="nav-item">Virtual Tour</a></li>
+                <li><a href="#contact" class="nav-item">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Main Content -->
     <main class="main-container">
-        <div class="card-wrapper">
         <div class="content-wrapper">
             <div class="subtitle">Virtual Tour</div>
             <h1 class="main-title">visibel.ai</h1>
@@ -606,113 +462,65 @@
             </p>
 
             <div class="features-grid">
-                <div class="card-wrapper">
-                  <div class="feature-card">
-                    <div class="feature-icon"></div>
+                <div class="feature-card">
                     <h3 class="feature-title">VISIBEL.AI BUILDING</h3>
-
-                    <!-- Gambar lokal -->
-                    <img src="Building.Ai.png" alt="Gambar Gedung" class="feature-image">
-
+                    <img src="Building.Ai.png" alt="Visibel AI Building" class="feature-image">
                     <p class="feature-description">
-                      The Visibel.ai Building is a digital innovation hub that showcases how AI can be transparent and ethical.
+                        The Visibel.ai Building is a digital innovation hub that showcases how AI can be transparent and ethical.
                     </p>
-
-                    <!-- Tombol -->
-                    <a href="building.html" class="btn-ripple">Eksplore</a>
-                  </div>
+                    <a href="building.html" class="btn-ripple">Explore</a>
                 </div>
-                <div class="features-grid">
-                    <div class="card-wrapper">
-                  <div class="feature-card">
-                    <div class="feature-icon"></div>
+
+                <div class="feature-card">
                     <h3 class="feature-title">MAIN LOBBY</h3>
-
-                    <!-- Gambar lokal -->
-                    <img src="lobby.Ai.png" alt="Gambar Gedung" class="feature-image">
-
+                    <img src="lobby.Ai.png" alt="Main Lobby" class="feature-image">
                     <p class="feature-description">
-                      The Main Lobby of Visibel.ai serves as the welcoming gateway to a transparent AI ecosystem.
-                        Designed with openness and clarity in mind, this space introduces visitors to the core principles of Visibel AI: ethical innovation, explainability, and human-centered technology.
+                        The Main Lobby of Visibel.ai serves as the welcoming gateway to a transparent AI ecosystem.
+                        Designed with openness and clarity in mind, this space introduces visitors to the core principles of Visibel AI.
                     </p>
-
-                    <!-- Tombol -->
-                    <a href="building.html" class="btn-ripple">Eksplore</a>
-                  </div>
+                    <a href="lobby.html" class="btn-ripple">Explore</a>
                 </div>
-                <div class="features-grid">
-                    <div class="card-wrapper">
-                  <div class="feature-card">
-                    <div class="feature-icon"></div>
+
+                <div class="feature-card">
                     <h3 class="feature-title">MONITORING ROOM</h3>
-
-                    <!-- Gambar lokal -->
-                    <img src="Monitoring.Ai.png" alt="Gambar Gedung" class="feature-image">
-
+                    <img src="Monitoring.Ai.png" alt="Monitoring Room" class="feature-image">
                     <p class="feature-description">
-                      The Monitoring Room is the control center where the performance and behavior of AI systems are observed in real time.
-                        Equipped with advanced dashboards and analytics tools, this room ensures that all AI operations are transparent, ethical, and aligned with user expectations.
+                        The Monitoring Room is the control center where AI systems are observed in real time.
+                        Equipped with advanced dashboards to ensure transparent and ethical operations.
                     </p>
-
-                    <!-- Tombol -->
-                    <a href="building.html" class="btn-ripple">Eksplore</a>
-                  </div>
-                </div> 
-                <div class="features-grid">
-                    <div class="card-wrapper">
-                  <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3 class="feature-title">MEETING ROOM</h3>
-
-                    <!-- Gambar lokal -->
-                    <img src="Meeting.Ai.png" alt="Gambar Gedung" class="feature-image">
-
-                    <p class="feature-description">
-                      The Meeting Room at Visibel AI is a collaborative space designed for brainstorming, strategy sessions, and team discussions.
-                        It fosters open communication and creativity, enabling developers, researchers, and stakeholders to align on ethical AI development and innovative solutions.
-                    </p>
-
-                    <!-- Tombol -->
-                    <a href="building.html" class="btn-ripple">Eksplore</a>
-                  </div>
-                </div>  
-                <div class="features-grid">
-                    <div class="card-wrapper">
-                  <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3 class="feature-title">DATA CENTER</h3>
-
-                    <!-- Gambar lokal -->
-                    <img src="Data center.Ai.png" alt="Gambar Gedung" class="feature-image">
-
-                    <p class="feature-description">
-                      The Data Center at Visibel.ai is a secure and high-performance facility where all data powering the AI systems is stored and managed.
-                        It ensures data integrity, privacy, and availability, supporting real-time processing and analysis for transparent AI operations.
-                    </p>
-
-                    <!-- Tombol -->
-                    <a href="building.html" class="btn-ripple">Eksplore</a>
-                  </div>
-                </div>  
-                <div class="features-grid">
-                    <div class="card-wrapper">
-                  <div class="feature-card">
-                    <div class="feature-icon"></div>
-                    <h3 class="feature-title">CONTAIMENT</h3>
-
-                    <!-- Gambar lokal -->
-                    <img src="Containment.Ai.png" alt="Gambar Gedung" class="feature-image">
-
-                    <p class="feature-description">
-                      A Containment Server is a specialized system designed to isolate, monitor, and control potentially risky processes or applications, especially in AI or cybersecurity environments.
-                        Its primary role is to “contain” any harmful or unexpected behavior to prevent it from affecting other systems or data.
-                    </p>
-
-                    <!-- Tombol -->
-                    <a href="building.html" class="btn-ripple">Eksplore</a>
-                  </div>
+                    <a href="monitoring.html" class="btn-ripple">Explore</a>
                 </div>
-            </div>  
+
+                <div class="feature-card">
+                    <h3 class="feature-title">MEETING ROOM</h3>
+                    <img src="Meeting.Ai.png" alt="Meeting Room" class="feature-image">
+                    <p class="feature-description">
+                        A collaborative space designed for brainstorming and strategy sessions.
+                        It fosters open communication and creativity for ethical AI development.
+                    </p>
+                    <a href="meeting.html" class="btn-ripple">Explore</a>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="feature-title">DATA CENTER</h3>
+                    <img src="Data center.Ai.png" alt="Data Center" class="feature-image">
+                    <p class="feature-description">
+                        A secure facility where all data powering the AI systems is stored and managed.
+                        Ensures data integrity, privacy, and availability for transparent operations.
+                    </p>
+                    <a href="datacenter.html" class="btn-ripple">Explore</a>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="feature-title">CONTAINMENT</h3>
+                    <img src="Containment.Ai.png" alt="Containment Server" class="feature-image">
+                    <p class="feature-description">
+                        A specialized system designed to isolate and monitor potentially risky processes.
+                        Its primary role is to contain any harmful behavior to prevent system-wide issues.
+                    </p>
+                    <a href="containment.html" class="btn-ripple">Explore</a>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -735,7 +543,10 @@
             particle.style.animationDelay = Math.random() * 6 + 's';
             particle.style.animationDuration = (4 + Math.random() * 4) + 's';
             
-            document.querySelector('.digital-background').appendChild(particle);
+            const background = document.querySelector('.digital-background');
+            if (background) {
+                background.appendChild(particle);
+            }
             
             setTimeout(() => {
                 if (particle.parentNode) {
@@ -752,69 +563,6 @@
             setTimeout(createParticle, i * 200);
         }
 
-        // Explore Area Function
-        function exploreArea() {
-            const btn = document.querySelector('.explore-btn');
-            
-            // Button animation
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = 'translateY(-4px) scale(1.05)';
-            }, 150);
-
-            // Create ripple effect
-            const ripple = document.createElement('div');
-            ripple.style.cssText = `
-                position: absolute;
-                width: 200px;
-                height: 200px;
-                background: rgba(0, 255, 255, 0.2);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: rippleEffect 1s ease-out;
-                left: 50%;
-                top: 50%;
-                margin-left: -100px;
-                margin-top: -100px;
-                pointer-events: none;
-                z-index: -1;
-            `;
-            
-            btn.style.position = 'relative';
-            btn.appendChild(ripple);
-            
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.parentNode.removeChild(ripple);
-                }
-            }, 1000);
-
-            // Simulate navigation or modal
-            console.log('Exploring Mechanical Area...');
-            
-            // You can add actual navigation or modal functionality here
-            // window.location.href = '/mechanical-area';
-            // or show a modal with detailed content
-        }
-
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rippleEffect {
-                0% { transform: scale(0); opacity: 0.8; }
-                100% { transform: scale(2); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav-item').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Add smooth scroll behavior or page navigation here
-            });
-        });
-
         // Feature cards hover effect enhancement
         document.querySelectorAll('.feature-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
@@ -826,12 +574,62 @@
             });
         });
 
+        // Button ripple effect
+        document.querySelectorAll('.btn-ripple').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: 200px;
+                    height: 200px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s ease-out;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: -100px;
+                    margin-top: -100px;
+                    pointer-events: none;
+                    z-index: 0;
+                `;
+                
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 600);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
         // Parallax effect for background elements
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
+            const rate = scrolled * -0.3;
             
-            document.querySelector('.circuit-layer').style.transform = `translateY(${rate}px)`;
+            const circuitLayer = document.querySelector('.circuit-layer');
+            if (circuitLayer) {
+                circuitLayer.style.transform = `translateY(${rate}px)`;
+            }
         });
     </script>
 </body>
