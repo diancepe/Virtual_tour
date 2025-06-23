@@ -651,6 +651,24 @@ pannellum.viewer('panorama-container', {
         }
     ]
 });
+         // Inisialisasi Pannellum viewer
+pannellum.viewer('panorama-container', {
+    type: 'equirectangular',
+    panorama: 'Meeting Rooom.jpg', // ganti nama file panorama kamu
+    autoLoad: true,
+    hotSpots: [
+        {
+            pitch: 2,
+            yaw: 150,
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspotLink,
+            createTooltipArgs: {
+                label: "Masuk ke Data Center",
+                url: "datacenter.html"
+            }
+        }
+    ]
+});
 
 // Fungsi hotspot
 function hotspotLink(hotSpotDiv, args) {
