@@ -655,7 +655,7 @@ pannellum.viewer('panorama-container', {
 // Fungsi hotspot
 function hotspotLink(hotSpotDiv, args) {
     hotSpotDiv.classList.add('custom-hotspot');
-    hotSpotDiv.innerHTML = args.label;
+    hotSpotDiv.innerHTML = args.label; // Label dari JSON Pannellum
     hotSpotDiv.onclick = function () {
         window.location.href = args.url;
     };
@@ -665,17 +665,24 @@ function hotspotLink(hotSpotDiv, args) {
 const style = document.createElement('style');
 style.innerHTML = `
     .custom-hotspot {
-        background: rgba(0, 123, 255, 0.85);
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 5px;
-        font-size: 14px;
+        padding: 12px 20px;
+        background: white;
+        color: #111;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
         font-family: 'Segoe UI', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
         cursor: pointer;
         white-space: nowrap;
     }
+
     .custom-hotspot:hover {
-        background: rgba(0, 123, 255, 1);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
+        background: #e6faff;
+        color: #0077cc;
     }
 `;
 document.head.appendChild(style);
