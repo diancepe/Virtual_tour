@@ -4,25 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Visibel Area - Virtual Tour</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
     <style>
-        :root {
-            --primary-color: #00ffff;
-            --secondary-color: #0080ff;
-            --accent-color: #8000ff;
-            --background-dark: #0a0a1a;
-            --background-medium: #1a1a2e;
-            --background-light: #16213e;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --border-color: rgba(0, 255, 255, 0.2);
-            --shadow-glow: rgba(0, 255, 255, 0.3);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -31,41 +13,32 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 30%, var(--background-light) 70%, #0f3460 100%);
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            color: var(--text-primary);
         }
 
-        /* Enhanced Background Elements */
-        .digital-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
+        /* Background Elements */
         .circuit-layer {
             position: absolute;
             width: 100%;
             height: 100%;
-            opacity: 0.4;
-            background: 
+            opacity: 0.3;
+            background-image: 
                 radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 80% 30%, rgba(0, 150, 255, 0.12) 0%, transparent 35%),
                 radial-gradient(circle at 40% 70%, rgba(0, 200, 150, 0.1) 0%, transparent 40%),
                 radial-gradient(circle at 70% 80%, rgba(100, 150, 255, 0.08) 0%, transparent 45%);
-            will-change: transform;
         }
 
         .circuit-grid {
             position: absolute;
-            inset: 0;
-            background: 
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
                 linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.03) 25%, rgba(0, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.03) 75%, rgba(0, 255, 255, 0.03) 76%, transparent 77%),
                 linear-gradient(transparent 24%, rgba(0, 255, 255, 0.03) 25%, rgba(0, 255, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.03) 75%, rgba(0, 255, 255, 0.03) 76%, transparent 77%);
             background-size: 80px 80px;
@@ -73,39 +46,54 @@
         }
 
         @keyframes gridMove {
-            from { transform: translate(0, 0); }
-            to { transform: translate(80px, 80px); }
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
         }
 
         .video-background {
             position: fixed;
-            inset: 0;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100%;
             overflow: hidden;
+            z-index: -1;
+            will-change: transform;
         }
 
         .video-background video {
-            width: 100%;
-            height: 100%;
+            min-width: 100%;
+            min-height: 100%;
             object-fit: cover;
         }
 
-        /* Elegant Particles */
+        /* Floating particles */
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+            animation: floatParticle 6s infinite ease-in-out;
             pointer-events: none;
-            will-change: transform, opacity;
         }
 
-        .particle--small { width: 3px; height: 3px; }
-        .particle--medium { width: 5px; height: 5px; }
-        .particle--large { width: 8px; height: 8px; }
+        .particle-small {
+            width: 3px;
+            height: 3px;
+        }
+
+        .particle-medium {
+            width: 5px;
+            height: 5px;
+        }
+
+        .particle-large {
+            width: 8px;
+            height: 8px;
+        }
 
         @keyframes floatParticle {
             0%, 100% { 
-                transform: translateY(0) translateX(0) scale(1); 
+                transform: translateY(0px) translateX(0px) scale(1); 
                 opacity: 0.3; 
             }
             33% { 
@@ -118,14 +106,14 @@
             }
         }
 
-        /* Modern Header */
+        /* Header Navigation */
         .header {
             position: relative;
             z-index: 10;
-            padding: 1.25rem 0;
-            background: var(--glass-bg);
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -134,68 +122,60 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 2.5rem;
+            padding: 0 40px;
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 16px;
         }
 
         .logo {
             width: 200px;
             height: auto;
             max-width: 100%;
-            transition: var(--transition-smooth);
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 20px var(--shadow-glow));
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 32px;
             list-style: none;
         }
 
         .nav-item {
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-weight: 400;
-            transition: var(--transition-smooth);
+            transition: all 0.3s ease;
             position: relative;
-            padding: 0.5rem 0;
+        }
+
+        .nav-item:hover {
+            color: #00ffff;
         }
 
         .nav-item::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -8px;
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, #00ffff, #0080ff);
             transition: width 0.3s ease;
-        }
-
-        .nav-item:hover {
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--shadow-glow);
         }
 
         .nav-item:hover::after {
             width: 100%;
         }
 
-        /* Refined Main Content */
+        /* Main Content Container */
         .main-container {
             position: relative;
             z-index: 5;
             min-height: calc(100vh - 120px);
-            padding: 3.75rem 2.5rem;
+            padding: 60px 40px;
         }
 
         .content-wrapper {
@@ -205,118 +185,88 @@
         }
 
         .subtitle {
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.25rem;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.1875rem;
+            letter-spacing: 3px;
             font-weight: 300;
-            animation: fadeInUp 0.8s ease-out;
         }
 
         .main-title {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(48px, 8vw, 96px);
             font-weight: 200;
-            margin-bottom: 2.5rem;
+            color: #fff;
+            margin-bottom: 40px;
             line-height: 1.1;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            background: linear-gradient(135deg, #00ffff 0%, #0080ff 50%, #8000ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px var(--shadow-glow);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
         }
 
         .description {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
             line-height: 1.8;
-            margin-bottom: 3.75rem;
+            margin-bottom: 60px;
             font-weight: 300;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
-        /* Enhanced Panorama Container */
-        .panorama-container {
-            width: 100%;
-            height: 500px;
-            margin: 3.75rem 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--border-color);
-            position: relative;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .panorama-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent 30%, var(--shadow-glow) 50%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .panorama-container:hover::before {
-            opacity: 0.1;
-        }
-
-        /* Elegant Features Grid */
+        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 5rem;
+            gap: 30px;
+            margin-top: 80px;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .feature-card {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 30px;
             text-align: center;
-            transition: var(--transition-bounce);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out calc(0.8s + var(--card-delay, 0s)) both;
         }
 
         .feature-card::before {
             content: '';
             position: absolute;
-            inset: -50%;
-            background: radial-gradient(circle, var(--shadow-glow) 0%, transparent 70%);
-            transition: var(--transition-smooth);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            transition: all 0.4s ease;
             transform: scale(0);
-            opacity: 0;
         }
 
         .feature-card:hover::before {
             transform: scale(1);
-            opacity: 0.5;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px);
             border-color: rgba(0, 255, 255, 0.4);
-            box-shadow: 0 20px 40px var(--shadow-glow);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
         }
 
         .feature-title {
-            color: var(--text-primary);
-            font-size: 1.25rem;
+            color: #fff;
+            font-size: 20px;
             font-weight: 500;
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
             position: relative;
             z-index: 2;
         }
@@ -325,37 +275,31 @@
             width: 100%;
             max-height: 200px;
             object-fit: cover;
-            margin: 1rem 0;
+            margin: 15px 0;
             border-radius: 12px;
             position: relative;
             z-index: 2;
-            transition: var(--transition-smooth);
-        }
-
-        .feature-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .feature-description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
             line-height: 1.6;
-            margin-bottom: 1.25rem;
+            margin-bottom: 20px;
             position: relative;
             z-index: 2;
         }
 
         .btn-ripple {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
             color: white;
-            font-weight: 600;
+            font-weight: bold;
             text-decoration: none;
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-            transition: var(--transition-bounce);
+            transition: all 0.3s ease;
             position: relative;
             z-index: 2;
             overflow: hidden;
@@ -364,26 +308,31 @@
         .btn-ripple::before {
             content: '';
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            transition: left 0.6s;
         }
 
         .btn-ripple:hover::before {
-            transform: translateX(100%);
+            left: 100%;
         }
 
         .btn-ripple:hover {
-            transform: translateY(-2px) scale(1.05);
+            transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
         }
 
-        /* Sophisticated Loading Animation */
+        /* Loading Animation */
         .loading-overlay {
             position: fixed;
-            inset: 0;
-            background: linear-gradient(135deg, var(--background-dark), var(--background-medium));
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -401,132 +350,68 @@
             width: 60px;
             height: 60px;
             border: 3px solid rgba(0, 255, 255, 0.1);
-            border-top: 3px solid var(--primary-color);
+            border-top: 3px solid #00ffff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        /* Custom Hotspot Styling */
-        .custom-hotspot {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0.75rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 0.75rem;
-            color: #222;
-            text-align: center;
-            transition: var(--transition-bounce);
-            cursor: pointer;
-            min-width: 60px;
-        }
-
-        .custom-hotspot:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 24px rgba(0, 123, 255, 0.5);
-        }
-
-        .custom-hotspot img {
-            border-radius: 6px;
-            width: 32px;
-            height: 32px;
-            display: block;
-            margin: 0 auto 0.375rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes rippleEffect {
-            from { transform: scale(0); opacity: 0.8; }
-            to { transform: scale(2); opacity: 0; }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-container {
-                padding: 0 1.25rem;
+                padding: 0 20px;
                 flex-direction: column;
-                gap: 1.25rem;
+                gap: 20px;
             }
 
             .nav-menu {
-                gap: 1.25rem;
+                gap: 20px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
 
             .main-container {
-                padding: 2.5rem 1.25rem;
+                padding: 40px 20px;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 1.25rem;
-                margin-top: 2.5rem;
+                gap: 20px;
+                margin-top: 40px;
             }
 
             .feature-card {
-                padding: 1.25rem;
+                padding: 20px;
             }
 
             .logo {
                 width: 150px;
             }
-
-            .panorama-container {
-                height: 300px;
-                margin: 2.5rem 0;
-            }
         }
 
         @media (max-width: 480px) {
             .main-container {
-                padding: 1.25rem 1rem;
+                padding: 20px 15px;
             }
             
             .feature-card {
-                padding: 1rem;
+                padding: 15px;
             }
             
             .btn-ripple {
-                padding: 0.625rem 1.25rem;
-                font-size: 0.875rem;
-            }
-
-            .panorama-container {
-                height: 250px;
+                padding: 10px 20px;
+                font-size: 14px;
             }
         }
 
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus styles for accessibility */
-        .nav-item:focus,
-        .btn-ripple:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
+        /* Ripple effect animation */
+        @keyframes rippleEffect {
+            0% { transform: scale(0); opacity: 0.8; }
+            100% { transform: scale(2); opacity: 0; }
         }
     </style>
 </head>
@@ -538,29 +423,33 @@
         </video>
     </div>
 
+    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
     </div>
 
+    <!-- Digital Background -->
     <div class="digital-background">
         <div class="circuit-layer"></div>
         <div class="circuit-grid"></div>
     </div>
 
+    <!-- Header -->
     <header class="header">
         <nav class="nav-container">
             <div class="logo-section">
-                <img src="visibel.ai-logo.png" alt="Visibel.ai Logo" class="logo" />
+                <img src="visibel.ai-logo.png" alt="Logo" class="logo" />
             </div>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-item">Home</a></li>
-                <li><a href="#about" class="nav-item">About</a></li>
-                <li><a href="#tour" class="nav-item">Tour</a></li>
-                <li><a href="#contact" class="nav-item">Contact</a></li>
+                <li><a href="#home" class="nav-item"></a></li>
+                <li><a href="#about" class="nav-item"></a></li>
+                <li><a href="#tour" class="nav-item"></a></li>
+                <li><a href="#contact" class="nav-item"></a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main class="main-container">
         <div class="content-wrapper">
             <div class="subtitle">Virtual Tour</div>
@@ -571,11 +460,11 @@
                 From the innovation room to the monitoring center, each area reflects our mission: to develop AI systems that are not only smart but also visible and trustworthy.
                 Take a look around — and discover how Visibel AI brings clarity to technology.
             </p>
-            
-            <div id="panorama-container" class="panorama-container"></div>
-            
+                    <div id="panorama-container" style="width: 100%; height: 500px; margin-top: 60px; border-radius: 20px; overflow: hidden;"></div>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
+                    <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
             <div class="features-grid">
-                <div class="feature-card" style="--card-delay: 0.1s;">
+                <div class="feature-card">
                     <h3 class="feature-title">VISIBEL.AI BUILDING</h3>
                     <img src="Building.Ai.png" alt="Visibel AI Building" class="feature-image">
                     <p class="feature-description">
@@ -584,7 +473,7 @@
                     <a href="visibelaibuilding.html" class="btn-ripple">Explore</a>
                 </div>
 
-                <div class="feature-card" style="--card-delay: 0.2s;">
+                <div class="feature-card">
                     <h3 class="feature-title">MAIN LOBBY</h3>
                     <img src="lobby.Ai.png" alt="Main Lobby" class="feature-image">
                     <p class="feature-description">
@@ -594,7 +483,7 @@
                     <a href="mainlobby.html" class="btn-ripple">Explore</a>
                 </div>
 
-                <div class="feature-card" style="--card-delay: 0.3s;">
+                <div class="feature-card">
                     <h3 class="feature-title">MONITORING ROOM</h3>
                     <img src="Monitoring.Ai.png" alt="Monitoring Room" class="feature-image">
                     <p class="feature-description">
@@ -604,7 +493,7 @@
                     <a href="monitoringroom.html" class="btn-ripple">Explore</a>
                 </div>
 
-                <div class="feature-card" style="--card-delay: 0.4s;">
+                <div class="feature-card">
                     <h3 class="feature-title">MEETING ROOM</h3>
                     <img src="Meeting.Ai.png" alt="Meeting Room" class="feature-image">
                     <p class="feature-description">
@@ -614,7 +503,7 @@
                     <a href="meetingroom.html" class="btn-ripple">Explore</a>
                 </div>
 
-                <div class="feature-card" style="--card-delay: 0.5s;">
+                <div class="feature-card">
                     <h3 class="feature-title">DATA CENTER</h3>
                     <img src="Data center.Ai.png" alt="Data Center" class="feature-image">
                     <p class="feature-description">
@@ -624,7 +513,7 @@
                     <a href="datacenter.html" class="btn-ripple">Explore</a>
                 </div>
 
-                <div class="feature-card" style="--card-delay: 0.6s;">
+                <div class="feature-card">
                     <h3 class="feature-title">CONTAINMENT</h3>
                     <img src="Containment.Ai.png" alt="Containment Server" class="feature-image">
                     <p class="feature-description">
@@ -637,199 +526,183 @@
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
     <script>
-        // Enhanced Application Class
-        class VirtualTourApp {
-            constructor() {
-                this.particleCount = 0;
-                this.maxParticles = 25;
-                this.animationFrameId = null;
-                this.isLoaded = false;
-                
-                this.init();
-            }
+        // Page Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
 
-            init() {
-                this.setupEventListeners();
-                this.initializeParticles();
-                this.initializePannellum();
-                this.handlePageLoad();
+        // Dynamic Particle Generation
+        function createParticle() {
+            const particle = document.createElement('div');
+            const size = Math.random() > 0.7 ? 'large' : Math.random() > 0.4 ? 'medium' : 'small';
+            particle.className = `particle particle-${size}`;
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            
+            const background = document.querySelector('.digital-background');
+            if (background) {
+                background.appendChild(particle);
             }
-
-            // Event Listeners Setup
-            setupEventListeners() {
-                window.addEventListener('load', () => this.handlePageLoad());
-                window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
-                
-                // Enhanced button interactions
-                this.setupButtonEffects();
-                this.setupNavigationEffects();
-                this.setupCardEffects();
-            }
-
-            // Page Loading Handler
-            handlePageLoad() {
-                if (this.isLoaded) return;
-                
-                setTimeout(() => {
-                    const loadingOverlay = document.getElementById('loadingOverlay');
-                    if (loadingOverlay) {
-                        loadingOverlay.classList.add('hidden');
-                        this.isLoaded = true;
-                        this.startParticleAnimation();
-                    }
-                }, 1000);
-            }
-
-            // Particle System
-            initializeParticles() {
-                // Create initial particles
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => this.createParticle(), i * 100);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
                 }
-            }
+            }, 8000);
+        }
 
-            createParticle() {
-                if (this.particleCount >= this.maxParticles) return;
+        // Generate particles continuously
+        setInterval(createParticle, 1500);
 
-                const particle = document.createElement('div');
-                const sizes = ['small', 'medium', 'large'];
-                const weights = [0.6, 0.3, 0.1]; // Probability weights
-                const size = this.weightedRandomChoice(sizes, weights);
-                
-                particle.className = `particle particle--${size}`;
-                
-                // Random positioning and timing
-                Object.assign(particle.style, {
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 6}s`,
-                    animationDuration: `${4 + Math.random() * 4}s`,
-                    animation: `floatParticle ${4 + Math.random() * 4}s infinite ease-in-out ${Math.random() * 6}s`
-                });
-                
-                const background = document.querySelector('.digital-background');
-                if (background) {
-                    background.appendChild(particle);
-                    this.particleCount++;
-                    
-                    // Clean up after animation
-                    setTimeout(() => {
-                        if (particle.parentNode) {
-                            particle.parentNode.removeChild(particle);
-                            this.particleCount--;
-                        }
-                    }, 10000);
-                }
-            }
+        // Initial particles
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 200);
+        }
 
-            startParticleAnimation() {
-                const createParticleInterval = () => {
-                    if (this.particleCount < this.maxParticles) {
-                        this.createParticle();
-                    }
-                    setTimeout(createParticleInterval, 1500 + Math.random() * 1000);
-                };
-                createParticleInterval();
-            }
+        // Feature cards hover effect enhancement
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
 
-            weightedRandomChoice(items, weights) {
-                const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
-                let random = Math.random() * totalWeight;
-                
-                for (let i = 0; i < items.length; i++) {
-                    random -= weights[i];
-                    if (random <= 0) return items[i];
-                }
-                return items[items.length - 1];
-            }
-
-            // Enhanced Button Effects
-            setupButtonEffects() {
-                document.querySelectorAll('.btn-ripple').forEach(btn => {
-                    btn.addEventListener('click', (e) => this.createRippleEffect(e, btn));
-                });
-            }
-
-            createRippleEffect(event, button) {
+        // Button ripple effect
+        document.querySelectorAll('.btn-ripple').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 const ripple = document.createElement('div');
-                const rect = button.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: 200px;
+                    height: 200px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s ease-out;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: -100px;
+                    margin-top: -100px;
+                    pointer-events: none;
+                    z-index: 0;
+                `;
                 
-                Object.assign(ripple.style, {
-                    position: 'absolute',
-                    width: `${size}px`,
-                    height: `${size}px`,
-                    background: 'rgba(255, 255, 255, 0.3)',
-                    borderRadius: '50%',
-                    transform: 'scale(0)',
-                    animation: 'rippleEffect 0.6s ease-out',
-                    left: '50%',
-                    top: '50%',
-                    marginLeft: `${-size / 2}px`,
-                    marginTop: `${-size / 2}px`,
-                    pointerEvents: 'none',
-                    zIndex: '0'
-                });
-                
-                button.style.position = 'relative';
-                button.appendChild(ripple);
+                this.style.position = 'relative';
+                this.appendChild(ripple);
                 
                 setTimeout(() => {
                     if (ripple.parentNode) {
                         ripple.parentNode.removeChild(ripple);
                     }
                 }, 600);
-            }
+            });
+        });
 
-            // Navigation Effects
-            setupNavigationEffects() {
-                document.querySelectorAll('.nav-item').forEach(link => {
-                    link.addEventListener('click', (e) => this.handleNavigation(e, link));
-                });
-            }
-
-            handleNavigation(event, link) {
-                event.preventDefault();
-                const targetId = link.getAttribute('href');
-                
-                if (targetId?.startsWith('#')) {
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                            behavior: 'smooth'
                         });
                     }
                 }
-            }
+            });
+        });
 
-            // Card Effects
-            setupCardEffects() {
-                document.querySelectorAll('.feature-card').forEach(card => {
-                    card.addEventListener('mouseenter', () => {
-                        card.style.zIndex = '10';
-                    });
-                    
-                    card.addEventListener('mouseleave', () => {
-                        card.style.zIndex = '1';
-                    });
-                });
+        // Parallax effect for background elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            const circuitLayer = document.querySelector('.circuit-layer');
+            if (circuitLayer) {
+                circuitLayer.style.transform = `translateY(${rate}px)`;
             }
-
-            // Parallax Scroll Effect
-            handleScroll() {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.3;
-                
-                const circuitLayer = document.querySelector('.circuit-layer');
-                if (circuitLayer) {
-                    circuitLayer.style.transform = `translateY(${rate}px)`;
-                }
+        });
+        // Inisialisasi Pannellum viewer
+pannellum.viewer('panorama-container', {
+    type: 'equirectangular',
+    panorama: 'Monitoring Room.jpg',// ganti nama file panorama kamu
+    autoLoad: true,
+    hotSpots: [
+        {
+            pitch: 2,
+            yaw: 150,
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspotLink,
+            createTooltipArgs: {
+                label: "Go To Meeting Room",
+                url: "meetingroom.html"
             }
+        }
+    ]
+});
+        
+// Fungsi hotspot
+function hotspotLink(hotSpotDiv, args) {
+    hotSpotDiv.classList.add('custom-hotspot');
+    hotSpotDiv.innerHTML = `
+        <img src="${args.image}" alt="${args.label}" style="width: 32px; height: 32px; display: block; margin: 0 auto;">
+        <div style="margin-top: 6px;">${args.label}</div>
+    `;
+    hotSpotDiv.onclick = function () {
+        window.location.href = args.url;
+    };
+}
+        hotSpots: [
+    {
+        pitch: 10,
+        yaw: 90,
+        cssClass: 'custom-hotspot',
+        createTooltipFunc: hotspotLink,
+        createTooltipArgs: {
+            label: "Ke Meeting Room",
+            url: "meetingroom.html",
+            image: "Meeting.Ai.png"  // Gambar ikon (harus di folder yang sama)
+        }
+    }
+]
+// Tambahkan style untuk hotspot jika perlu
+const style = document.createElement('style');
+style.innerHTML = `
+    .custom-hotspot {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 10px;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 12px;
+        color: #222;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        min-width: 60px;
+    }
 
-            // Pannellum Initialization
-            initializePannellum() {
-                try {
-                    pannellum.viewer('panorama-
+    .custom-hotspot:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 24px rgba(0, 123, 255, 0.5);
+    }
+
+    .custom-hotspot img {
+        border-radius: 6px;
+    }
+`;
+document.head.appendChild(style);
+    </script>
+</body>
+</html>
